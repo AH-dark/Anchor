@@ -1,3 +1,6 @@
+### Program
+/config.yaml
+
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
