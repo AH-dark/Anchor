@@ -10,7 +10,7 @@ type system struct {
 // githubProxy GitHub镜像反向代理配置
 type githubProxy struct {
 	Open      bool     `yaml:"open"`
-	Minify    bool     `yaml:"minify"`
+	Minify    string   `yaml:"minify"`
 	Endpoint  []string `yaml:"endpoint,flow"`
 	WhiteList []string `yaml:"white_list,flow"`
 }
@@ -18,7 +18,7 @@ type githubProxy struct {
 // npmProxy Npm镜像反向代理配置
 type npmProxy struct {
 	Open      bool     `yaml:"open"`
-	Minify    bool     `yaml:"minify"`
+	Minify    string   `yaml:"minify"`
 	Endpoint  []string `yaml:"endpoint,flow"`
 	WhiteList []string `yaml:"white_list,flow"`
 }

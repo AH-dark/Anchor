@@ -57,3 +57,11 @@ func RelativePath(name string) string {
 	e, _ := os.Executable()
 	return filepath.Join(filepath.Dir(e), name)
 }
+
+// FileHasMinSuffix 文件第二段后缀是否为`min`
+func FileHasMinSuffix(path string) bool {
+	p := strings.Split(path, "/")
+	filename := p[len(p)-1]
+	f := strings.Split(filename, ".")
+	return len(f) > 2 && f[len(f)-2] == "min"
+}

@@ -1,5 +1,11 @@
 package conf
 
+const (
+	MinifyAll     = "all"     // MinifyAll 压缩所有可压缩文件
+	MinifyOnlyMin = "onlyMin" // MinifyOnlyMin 仅压缩 .min.* 结尾的文件
+	MinifyNone    = "none"    // MinifyNone 不压缩文件
+)
+
 var Config = &config{
 	System: system{
 		Name:   "Anchor",
@@ -9,13 +15,13 @@ var Config = &config{
 	Proxy: proxy{
 		Github: githubProxy{
 			Open:      false,
-			Minify:    false,
+			Minify:    MinifyOnlyMin,
 			Endpoint:  []string{"https://raw.githubusercontent.com/{{user}}/{{repo}}/{{version}}/{{path}}"},
 			WhiteList: nil,
 		},
 		Npm: npmProxy{
 			Open:      false,
-			Minify:    false,
+			Minify:    MinifyOnlyMin,
 			Endpoint:  []string{"https://unpkg.com/{{package}}@{{version}}/{{path}}"},
 			WhiteList: nil,
 		},
