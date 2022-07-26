@@ -22,10 +22,10 @@ func init() {
 func main() {
 	r := routers.InitRouter()
 
-	utils.Log().Info("准备监听 %s", conf.Config.System.Port)
-	err := r.Run(conf.Config.System.Port)
+	utils.Log().Info("准备监听 %s", conf.Config.System.Listen)
+	err := r.Run(conf.Config.System.Listen)
 	if err != nil {
-		utils.Log().Panic("监听 %s 时失败，%s", conf.Config.System.Port, err)
+		utils.Log().Panic("监听 %s 时失败，%s", conf.Config.System.Listen, err)
 		return
 	}
 }
