@@ -2,9 +2,9 @@ package conf
 
 // system 系统设置
 type system struct {
-	Name  string `yaml:"name"`
-	Port  string `yaml:"port"`
-	Debug bool   `yaml:"debug"`
+	Name   string `yaml:"name"`
+	Listen string `yaml:"listen"`
+	Debug  bool   `yaml:"debug"`
 }
 
 // githubProxy GitHub镜像反向代理配置

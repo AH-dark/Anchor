@@ -2,9 +2,9 @@ package conf
 
 var Config = &config{
 	System: system{
-		Name:  "Anchor",
-		Port:  ":8080",
-		Debug: false,
+		Name:   "Anchor",
+		Listen: ":8080",
+		Debug:  false,
 	},
 	Proxy: proxy{
 		Github: githubProxy{
