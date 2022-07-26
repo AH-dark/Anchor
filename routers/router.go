@@ -11,6 +11,7 @@ func InitRouter() *gin.Engine {
 
 	r.Use(middleware.CORS())
 	r.Use(middleware.Gzip())
+	r.Use(middleware.MethodControl())
 
 	// GitHub proxy
 	if conf.Config.Proxy.Github.Open {
