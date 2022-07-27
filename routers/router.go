@@ -15,6 +15,7 @@ func InitRouter() *gin.Engine {
 	r.Use(middleware.CORS())
 	r.Use(middleware.Gzip())
 	r.Use(middleware.MethodControl())
+	r.Use(middleware.CustomHeaders())
 
 	store := persist.NewMemoryStore(1 * time.Minute)
 

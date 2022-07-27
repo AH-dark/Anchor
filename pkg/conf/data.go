@@ -29,7 +29,7 @@ var Config = &config{
 	CORS: cors{
 		AllowOrigins:     []string{"UNSET"},
 		AllowMethods:     []string{"GET", "HEAD", "OPTIONS"},
-		AllowHeaders:     []string{"Content-Length", "Content-Type"},
+		AllowHeaders:     []string{"Content-Length", "Content-Type", "X-Powered-By", "X-Run-By", "X-Timestamp"},
 		AllowCredentials: false,
 		ExposeHeaders:    nil,
 	},
