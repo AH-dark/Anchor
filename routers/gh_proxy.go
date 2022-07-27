@@ -6,11 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func InitGithubProxy(r *gin.Engine) {
+func InitGithubProxy(r *gin.RouterGroup) {
 	utils.Log().Info("GitHub 代理已开启")
 
-	g := r.Group("/gh/")
 	{
-		g.Any(":user/:repo/:version/*path", controllers.GithubRawFileProxy)
+		r.Any(":user/:repo/:version/*path", controllers.GithubRawFileProxy)
 	}
 }

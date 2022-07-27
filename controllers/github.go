@@ -19,6 +19,7 @@ func GithubRawFileProxy(c *gin.Context) {
 	data, contentType := services.GetGithubRawFile(user, repo, version, path)
 	if data == nil {
 		c.String(http.StatusNotFound, http.StatusText(http.StatusNotFound))
+		return
 	}
 
 	switch conf.Config.Proxy.Github.Minify {
