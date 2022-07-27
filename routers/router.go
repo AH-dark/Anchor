@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// InitRouter 路由初始化
 func InitRouter() *gin.Engine {
 	r := gin.Default()
 
@@ -29,7 +30,10 @@ func InitRouter() *gin.Engine {
 
 	// Npm proxy
 	if conf.Config.Proxy.Npm.Open {
-		InitNpmProxy(r)
+		npm := r.Group("/npm/")
+		npm.Use(cache.CacheByRequestURI(store, 3*24*time.Hour))
+
+		InitNpmProxy(npm)
 	}
 
 	return r

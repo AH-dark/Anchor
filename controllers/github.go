@@ -28,6 +28,7 @@ func GithubRawFileProxy(c *gin.Context) {
 		return
 	}
 
+	// 压缩文件
 	switch conf.Config.Proxy.Github.Minify {
 	case conf.MinifyAll:
 		data = compress.CompressBytes(data, contentType)

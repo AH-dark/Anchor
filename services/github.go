@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// GetGithubRawFile 从 GitHub Raw 获取源文件信息
 func GetGithubRawFile(user string, repo string, version string, path string) ([]byte, string) {
 	for _, endpoint := range conf.Config.Proxy.Github.Endpoint {
 		url := utils.Replace(map[string]string{
@@ -36,4 +37,32 @@ func GetGithubRawFile(user string, repo string, version string, path string) ([]
 	}
 
 	return nil, ""
+}
+
+// CheckGithubWhiteList 检验仓库信息是否在白名单内
+func CheckGithubWhiteList(user string, repo string) bool {
+	if len(conf.Config.Proxy.Github.WhiteList) == 0 {
+		return true
+	}
+
+	for _, v := range conf.Config.Proxy.Github.WhiteList {
+		t := strings.Split(v, "/")
+		if len(t) != 2 {
+			continue
+		}
+
+		if t[0] == "*" {
+			return true
+		}
+
+		if t[0] == user {
+			if t[1] == repo {
+				return true
+			} else if t[1] == "*" {
+				return true
+			}
+		}
+	}
+
+	return false
 }

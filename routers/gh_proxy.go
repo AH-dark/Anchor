@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// InitGithubProxy 初始化 GitHub 代理功能
 func InitGithubProxy(r *gin.RouterGroup) {
 	utils.Log().Info("GitHub 代理已开启")
 
