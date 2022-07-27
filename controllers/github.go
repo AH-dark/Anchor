@@ -15,6 +15,12 @@ func GithubRawFileProxy(c *gin.Context) {
 	version := c.Param("version")
 	path := c.Param("path")
 
+	// 校验
+	if !services.CheckGithubWhiteList(user, repo) {
+		c.String(http.StatusForbidden, http.StatusText(http.StatusForbidden))
+		return
+	}
+
 	// 获取文件
 	data, contentType := services.GetGithubRawFile(user, repo, version, path)
 	if data == nil {
