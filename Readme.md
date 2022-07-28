@@ -110,12 +110,12 @@ Our automatic compression follows these rules:
 
 ##### All
 
-When you set minify to all in `config.yaml`, the system will compress **all** files that can be compressed.
+When you set `minify` to `all` in `config.yaml`, the system will compress **all** files that can be compressed.
 
 ##### OnlyMin
 
-In this mode, the system compresses only files ending in `.min.*`, such as `.min.js`, `.min.css`, `.min.json`.
+In this mode, the system compresses **only files ending in `.min.*`**, such as `.min.js`, `.min.css`, `.min.json`.
 
 ##### None
 
-In this mode, the system will not compress any files.
+In this mode, the system will **not compress any files**.
