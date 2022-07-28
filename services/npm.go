@@ -55,21 +55,17 @@ func CheckNpmWhiteList(user string, pkg string) bool {
 
 	for _, v := range conf.Config.Proxy.Npm.WhiteList {
 		t := strings.Split(v, "/")
-		if len(t) != 2 {
-			continue
-		}
-
-		u := strings.TrimPrefix(t[0], "@")
-		p := t[1]
-
-		if u == "*" {
-			return true
-		}
-
-		if u == user {
+		switch len(t) {
+		case 1:
+			p := t[0]
 			if p == pkg {
 				return true
-			} else if p == "*" {
+			}
+		case 2:
+			u := strings.TrimPrefix(t[0], "@")
+			p := t[1]
+
+			if u == user && p == pkg {
 				return true
 			}
 		}
