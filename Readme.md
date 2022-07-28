@@ -50,3 +50,72 @@ cors:
 Gin will listen according to the port information in `config.yaml`, which is `0.0.0.0:8080` by default in the package.
 
 Note that Gin omits the `0.0.0.0` prefix by default, but you need to add `:` before the port number.
+
+## Use
+
+### GitHub
+
+The GitHub proxy service obtains resources from https://raw.githubusercontent.com by default in the following format:
+
+```
+https://<domain>/gh/<user>/<repo>/<version>/<path>
+```
+
+### NPM
+
+The NPM proxy service obtains resources from https://unpkg.com by default in the following format:
+
+```
+### Full
+https://<domain>/npm/@<user>/<package>@<version>/<path>
+
+### No version
+https://<domain>/npm/@<user>/<package>/<path>
+# equal to
+https://<domain>/npm/@<user>/<package>@latest/<path>
+
+### Standard package
+https://<domain>/npm/<package>@<version>/<path>
+```
+
+## Feature
+
+### Auto compress
+
+The automatic compression of each service is determined according to the `config.yaml` filled in by the user.
+
+It can be used only if the `minify` item is set to `all` or `onlyMin` in the configuration file of the corresponding service.
+
+We will explain to you in detail the difference between the three modes.
+
+#### Support
+
+The currently supported file types are as follows:
+
+* text/html
+* application/javascript
+* text/css
+* application/json
+
+[tdewolff/minify](https://github.com/tdewolff/minify) provides file compression support for this project.
+
+#### Compress
+
+The compression mode of different applications is different, you need to configure the `minify` option of the corresponding application in `config.yaml`.
+
+Our automatic compression follows these rules:
+
+* Priority back to source files with the origin path.
+* When the file with the origin path is not available, it will try to remove the `.min.` part that exists in the path and try to get it again.
+
+##### All
+
+When you set minify to all in `config.yaml`, the system will compress **all** files that can be compressed.
+
+##### OnlyMin
+
+In this mode, the system compresses only files ending in `.min.*`, such as `.min.js`, `.min.css`, `.min.json`.
+
+##### None
+
+In this mode, the system will not compress any files.
