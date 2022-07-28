@@ -1,10 +1,13 @@
 name: Go Release
 
 on:
+  release:
+    types:
+      - published
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      - "*.*.*"
+      - "v*.*.*"
 
 env:
   CGO_ENABLED: 1
