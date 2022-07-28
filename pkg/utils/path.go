@@ -60,7 +60,7 @@ func RelativePath(name string) string {
 
 // FileHasMinSuffix 文件第二段后缀是否为`min`
 func FileHasMinSuffix(path string) bool {
-	p := SplitPath(path)
+	p := strings.Split(path, "/")
 	filename := p[len(p)-1]
 	f := strings.Split(filename, ".")
 	return len(f) > 2 && f[len(f)-2] == "min"
@@ -75,7 +75,9 @@ func RemoveMinSuffix(path string) string {
 	arr := strings.Split(path, "/")
 	ext := Extension(path)
 	last := arr[len(arr)-1]
-	last = strings.Replace(last, ".min."+ext, "."+ext, 1)
+	for strings.HasSuffix(last, ".min."+ext) {
+		last = strings.Replace(last, ".min."+ext, "."+ext, 1)
+	}
 	arr[len(arr)-1] = last
 
 	return strings.Join(arr, "/")
@@ -83,7 +85,7 @@ func RemoveMinSuffix(path string) string {
 
 // Extension 获取文件扩展名
 func Extension(path string) string {
-	p := SplitPath(path)
+	p := strings.Split(path, "/")
 	filename := p[len(p)-1]
 	f := strings.Split(filename, ".")
 	if len(f) <= 1 {
