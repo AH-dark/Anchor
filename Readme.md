@@ -4,7 +4,15 @@ Self-built proxy system for GitHub repositories, NPM packages, and WordPress the
 
 During initialization, if there is no `config.yaml` file in the current directory, it will be automatically generated.
 
-The content of the initial file is as follows:
+## Deploy
+
+Currently, we only provide packaged applications, including support for four system architectures.
+
+1. Go to <https://github.com/AH-dark/Anchor/releases>, get the latest release.
+2. Download the file and unzip it to get the executable within.
+3. Run the executable file, the `config.yaml` file will be automatically generated during initialization, and you can configure it by yourself.
+
+### Configuration
 
 ```yaml
 # 系统设置
@@ -34,3 +42,9 @@ cors:
     allow_credentials: false
     expose_headers: []
 ```
+
+### Port
+
+Gin will listen according to the port information in `config.yaml`, which is `0.0.0.0:8080` by default in the package.
+
+Note that Gin omits the `0.0.0.0` prefix by default, but you need to add `:` before the port number.
