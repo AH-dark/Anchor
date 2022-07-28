@@ -76,6 +76,11 @@ https://<domain>/npm/@<user>/<package>@latest/<path>
 
 ### Standard package
 https://<domain>/npm/<package>@<version>/<path>
+
+### No path
+https://<domain>/npm/<package>@<version>
+# will be redirected to
+https://<domain>/npm/@<user>/<package>@<version>/<path> # main file
 ```
 
 ## Feature

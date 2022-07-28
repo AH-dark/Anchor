@@ -11,6 +11,9 @@ func InitNpmProxy(r *gin.RouterGroup) {
 	utils.Log().Info("NPM 代理已开启")
 
 	{
+		r.GET("@:user/:package", controllers.NpmRedirect)
+		r.GET(":package", controllers.NpmRedirect)
+
 		r.GET(":package/*path", controllers.NpmRawFileProxy)
 		r.GET("@:user/:package/*path", controllers.NpmRawFileProxy)
 	}

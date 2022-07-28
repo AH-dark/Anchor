@@ -1,11 +1,13 @@
 package services
 
 import (
+	"errors"
 	"fmt"
 	"github.com/AH-dark/Anchor/pkg/conf"
 	"github.com/AH-dark/Anchor/pkg/utils"
 	"io/ioutil"
 	"net/http"
+	"path/filepath"
 	"strings"
 )
 
@@ -72,4 +74,46 @@ func CheckNpmWhiteList(user string, pkg string) bool {
 	}
 
 	return false
+}
+
+// GetPackageInfo 从 Registry 获取包信息
+func GetPackageInfo(pkg string, version string) (*NpmPackageData, error) {
+	if version == "" {
+		version = "latest"
+	}
+
+	url := fmt.Sprintf("https://registry.npmjs.org/%s/%s", pkg, version)
+	resp, err := client.Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	data, err := UnmarshalNpmRegistryData(body)
+	if err != nil {
+		return nil, err
+	}
+
+	return &data, nil
+}
+
+const (
+	ErrNoMainFlag = "no main flag"
+)
+
+func ParsePackageMainUrl(info *NpmPackageData) (string, error) {
+	mainFile := info.Main
+	if mainFile == nil {
+		return "", errors.New(ErrNoMainFlag)
+	}
+
+	id := info.ID
+	url := fmt.Sprintf("%s/", id)
+	url = filepath.Join(url, *mainFile)
+
+	return url, nil
 }
