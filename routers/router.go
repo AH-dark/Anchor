@@ -3,9 +3,11 @@ package routers
 import (
 	"github.com/AH-dark/Anchor/middleware"
 	"github.com/AH-dark/Anchor/pkg/conf"
+	"github.com/AH-dark/Anchor/pkg/page"
 	cache "github.com/chenyahui/gin-cache"
 	"github.com/chenyahui/gin-cache/persist"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"time"
 )
 
@@ -35,6 +37,10 @@ func InitRouter() *gin.Engine {
 
 		InitNpmProxy(npm)
 	}
+
+	r.NoRoute(func(c *gin.Context) {
+		c.Data(http.StatusOK, "text/html", []byte(page.NotFound()))
+	})
 
 	return r
 }
