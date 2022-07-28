@@ -4,10 +4,6 @@ on:
   release:
     types:
       - published
-  push:
-    tags:
-      - "*.*.*"
-      - "v*.*.*"
 
 env:
   CGO_ENABLED: 1
