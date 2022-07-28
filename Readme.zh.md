@@ -76,6 +76,11 @@ https://<域名>/npm/@<组织名>/<包名>@latest/<路径>
 
 ### 标准的
 https://<域名>/npm/<包名>@<版本>/<路径>
+
+### 无路径的
+https://<domain>/npm/<package>@<version>
+# 将被重定向到
+https://<domain>/npm/@<user>/<package>@<version>/<path> # main 文件（来自包内 package.json 定义）
 ```
 
 ## 特性
