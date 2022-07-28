@@ -6,6 +6,7 @@ import (
 	"github.com/AH-dark/Anchor/pkg/utils"
 	"github.com/AH-dark/Anchor/services"
 	"github.com/gin-gonic/gin"
+	"mime"
 	"net/http"
 )
 
@@ -21,24 +22,31 @@ func GithubRawFileProxy(c *gin.Context) {
 		return
 	}
 
+	contentType := mime.TypeByExtension("." + utils.Extension(path))
+	compressMode := compress.CanBeCompressed(path, contentType, conf.Config.Proxy.Github.Minify)
+
 	// 获取文件
-	data, contentType := services.GetGithubRawFile(user, repo, version, path)
+	data := services.GetGithubRawFile(user, repo, version, path)
 	if data == nil {
-		c.String(http.StatusNotFound, http.StatusText(http.StatusNotFound))
-		return
+		if compressMode {
+			path = utils.RemoveMinSuffix(path)
+			utils.Log().Debug("原路径请求失败，即将使用新路径重新请求：%s", path)
+			data = services.GetGithubRawFile(user, repo, version, path)
+			if data == nil {
+				c.String(http.StatusNotFound, http.StatusText(http.StatusNotFound))
+				return
+			}
+		} else {
+			c.String(http.StatusNotFound, http.StatusText(http.StatusNotFound))
+			return
+		}
 	}
 
 	// 压缩文件
-	switch conf.Config.Proxy.Github.Minify {
-	case conf.MinifyAll:
-		data = compress.CompressBytes(data, contentType)
+	if compressMode {
+		data = compress.Bytes(data, contentType)
 		c.Header("X-Anchor-Minify", "true")
-	case conf.MinifyOnlyMin:
-		if utils.FileHasMinSuffix(path) {
-			data = compress.CompressBytes(data, contentType)
-			c.Header("X-Anchor-Minify", "true")
-		}
-	default:
+	} else {
 		c.Header("X-Anchor-Minify", "false")
 	}
 

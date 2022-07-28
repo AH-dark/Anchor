@@ -11,6 +11,6 @@ func InitGithubProxy(r *gin.RouterGroup) {
 	utils.Log().Info("GitHub 代理已开启")
 
 	{
-		r.Any(":user/:repo/:version/*path", controllers.GithubRawFileProxy)
+		r.GET(":user/:repo/:version/*path", controllers.GithubRawFileProxy)
 	}
 }

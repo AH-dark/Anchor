@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"github.com/AH-dark/Anchor/pkg/conf"
 	"github.com/AH-dark/Anchor/pkg/utils"
 	"io/ioutil"
@@ -8,12 +9,19 @@ import (
 	"strings"
 )
 
-// GetGithubRawFile 从 GitHub Raw 获取源文件信息
-func GetGithubRawFile(user string, repo string, version string, path string) []byte {
-	for _, endpoint := range conf.Config.Proxy.Github.Endpoint {
+// GetNpmRawFile 从 Npm 获取源文件信息
+func GetNpmRawFile(user string, pkg string, version string, path string) []byte {
+	for _, endpoint := range conf.Config.Proxy.Npm.Endpoint {
+		if user != "" {
+			pkg = fmt.Sprintf("@%s/%s", user, pkg)
+		}
+
+		if version == "" {
+			version = "latest"
+		}
+
 		url := utils.Replace(map[string]string{
-			"{{user}}":    user,
-			"{{repo}}":    repo,
+			"{{package}}": pkg,
 			"{{version}}": version,
 			"{{path}}":    strings.Trim(path, "/"),
 		}, endpoint)
@@ -39,26 +47,29 @@ func GetGithubRawFile(user string, repo string, version string, path string) []b
 	return nil
 }
 
-// CheckGithubWhiteList 检验仓库信息是否在白名单内
-func CheckGithubWhiteList(user string, repo string) bool {
-	if len(conf.Config.Proxy.Github.WhiteList) == 0 {
+// CheckNpmWhiteList 检验仓库信息是否在白名单内
+func CheckNpmWhiteList(user string, pkg string) bool {
+	if len(conf.Config.Proxy.Npm.WhiteList) == 0 {
 		return true
 	}
 
-	for _, v := range conf.Config.Proxy.Github.WhiteList {
+	for _, v := range conf.Config.Proxy.Npm.WhiteList {
 		t := strings.Split(v, "/")
 		if len(t) != 2 {
 			continue
 		}
 
-		if t[0] == "*" {
+		u := strings.TrimPrefix(t[0], "@")
+		p := t[1]
+
+		if u == "*" {
 			return true
 		}
 
-		if t[0] == user {
-			if t[1] == repo {
+		if u == user {
+			if p == pkg {
 				return true
-			} else if t[1] == "*" {
+			} else if p == "*" {
 				return true
 			}
 		}

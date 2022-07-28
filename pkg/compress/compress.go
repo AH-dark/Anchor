@@ -17,10 +17,10 @@ func init() {
 	m.AddFunc("text/css", css.Minify)
 	m.AddFunc("text/html", html.Minify)
 	m.AddFuncRegexp(regexp.MustCompile("^(application|text)/(x-)?(java|ecma)script$"), js.Minify)
-	m.AddFunc("text/json", json.Minify)
+	m.AddFunc("application/json", json.Minify)
 }
 
-func CompressBytes(data []byte, contentType string) []byte {
+func Bytes(data []byte, contentType string) []byte {
 	d, err := m.Bytes(contentType, data)
 	if err != nil {
 		utils.Log().Error("压缩 %s 文件时错误，%s", contentType, err)
