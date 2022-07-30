@@ -30,19 +30,20 @@ func GetNpmRawFile(user string, pkg string, version string, path string) []byte 
 
 		resp, err := client.Get(url)
 		if err != nil {
-			utils.Log().Debug("向 %s 发送 GET 请求时错误，%s", url, err)
+			utils.Log().Error("向 %s 发送 GET 请求时错误，%s", url, err)
 			continue
 		}
 
 		if resp.StatusCode == http.StatusOK {
 			body, err := ioutil.ReadAll(resp.Body)
 			if err != nil {
+				utils.Log().Error("解析 Body 失败，%s", err)
 				continue
 			}
 
 			return body
 		} else {
-			utils.Log().Debug("向 %s 发送 GET 请求时错误，返回状态码 %d", url, resp.StatusCode)
+			utils.Log().Error("向 %s 发送 GET 请求时错误，返回状态码 %d", url, resp.StatusCode)
 		}
 	}
 

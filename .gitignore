@@ -1,5 +1,6 @@
 ### Program
-/config.yaml
+/config.test.yaml
+/config.prod.yaml
 
 ### VisualStudioCode template
 .vscode/*

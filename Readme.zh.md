@@ -35,9 +35,15 @@ proxy:
         minify: onlyMin # 压缩文件配置，共有三种类型：all / onlyMin / none
         endpoint: ['https://unpkg.com/{{package}}@{{version}}/{{path}}'] # array<string> 代理列表，从上到下依次尝试
         white_list: [] # 白名单，格式：@<user>/<package> or <package>
-        
+    wordpress: # WordPress 代理
+        plugin_open: false # 是否开启插件代理
+        theme_open: false # 是否开启插件代理
+        minify: none # 压缩文件配置，只支持两种：all / none
+        plugin_white_list: [] # 插件白名单，格式：<name>
+        theme_white_list: [] # 主题白名单，格式：<name>
+
 # 跨域配置
-  cors：
+cors:
     allow_origins: [UNSET] # 默认为通配符
     allow_methods: [GET, HEAD, OPTIONS]
     allow_headers: [Content-Length, Content-Type, X-Powered-By, X-Run-By, X-Timestamp]
@@ -81,6 +87,18 @@ https://<域名>/npm/<包名>@<版本>/<路径>
 https://<domain>/npm/<package>@<version>
 # 将被重定向到
 https://<domain>/npm/@<user>/<package>@<version>/<path> # main 文件（来自包内 package.json 定义）
+```
+
+### WordPress
+
+WordPress 代理服务默认从 https://themes.svn.wordpress.org 和 https://plugins.svn.wordpress.org 获取资源，格式如下：
+
+```
+# 对于 wordpress.org 中的上架主题
+https://<domain>/wp/theme/<name>/<version>/<path>
+
+# 对于 wordpress.org 中的上架插件
+https://<domain>/wp/plugin/<name>/<version>/<path>
 ```
 
 ## 特性

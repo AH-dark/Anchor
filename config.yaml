@@ -1,0 +1,27 @@
+system:
+    name: Anchor
+    listen: :8080
+    debug: false
+proxy:
+    github:
+        open: false
+        minify: onlyMin
+        endpoint: ['https://raw.githubusercontent.com/{{user}}/{{repo}}/{{version}}/{{path}}']
+        white_list: []
+    npm:
+        open: false
+        minify: onlyMin
+        endpoint: ['https://unpkg.com/{{package}}@{{version}}/{{path}}']
+        white_list: []
+    wordpress:
+        plugin_open: false
+        theme_open: false
+        minify: none
+        plugin_white_list: []
+        theme_white_list: []
+cors:
+    allow_origins: [UNSET]
+    allow_methods: [GET, HEAD, OPTIONS]
+    allow_headers: [Content-Length, Content-Type, X-Powered-By, X-Run-By, X-Timestamp]
+    allow_credentials: false
+    expose_headers: []

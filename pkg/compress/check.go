@@ -14,7 +14,7 @@ var compressible = []string{
 	"application/json",
 }
 
-func CanBeCompressed(path string, contentType string, minify string) bool {
+func CanBeCompressed(path string, contentType string, minify conf.MinifyType) bool {
 	if minify == conf.MinifyNone {
 		return false
 	} else if minify == conf.MinifyOnlyMin && !utils.FileHasMinSuffix(path) {

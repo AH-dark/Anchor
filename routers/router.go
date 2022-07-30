@@ -38,8 +38,16 @@ func InitRouter() *gin.Engine {
 		InitNpmProxy(npm)
 	}
 
+	// Npm proxy
+	if conf.Config.Proxy.Wp.PluginOpen || conf.Config.Proxy.Wp.ThemeOpen {
+		wp := r.Group("/wp/")
+		wp.Use(cache.CacheByRequestURI(store, 3*24*time.Hour))
+
+		InitWordpressProxy(wp)
+	}
+
 	r.NoRoute(func(c *gin.Context) {
-		c.Data(http.StatusOK, "text/html", []byte(page.NotFound()))
+		c.Data(http.StatusNotFound, "text/html", []byte(page.NotFound()))
 	})
 
 	return r

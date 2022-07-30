@@ -9,26 +9,26 @@ type system struct {
 
 // githubProxy GitHub镜像反向代理配置
 type githubProxy struct {
-	Open      bool     `yaml:"open"`
-	Minify    string   `yaml:"minify"`
-	Endpoint  []string `yaml:"endpoint,flow"`
-	WhiteList []string `yaml:"white_list,flow"`
+	Open      bool       `yaml:"open"`
+	Minify    MinifyType `yaml:"minify"`
+	Endpoint  []string   `yaml:"endpoint,flow"`
+	WhiteList []string   `yaml:"white_list,flow"`
 }
 
 // npmProxy Npm镜像反向代理配置
 type npmProxy struct {
-	Open      bool     `yaml:"open"`
-	Minify    string   `yaml:"minify"`
-	Endpoint  []string `yaml:"endpoint,flow"`
-	WhiteList []string `yaml:"white_list,flow"`
+	Open      bool       `yaml:"open"`
+	Minify    MinifyType `yaml:"minify"`
+	Endpoint  []string   `yaml:"endpoint,flow"`
+	WhiteList []string   `yaml:"white_list,flow"`
 }
 
 type wordpressProxy struct {
-	PluginOpen      bool     `yaml:"plugin_open"`
-	ThemeOpen       bool     `yaml:"theme_open"`
-	Minify          string   `yaml:"minify"`
-	PluginWhiteList []string `yaml:"plugin_white_list,flow"`
-	ThemeWhiteList  []string `yaml:"theme_white_list,flow"`
+	PluginOpen      bool       `yaml:"plugin_open"`
+	ThemeOpen       bool       `yaml:"theme_open"`
+	Minify          MinifyType `yaml:"minify"`
+	PluginWhiteList []string   `yaml:"plugin_white_list,flow"`
+	ThemeWhiteList  []string   `yaml:"theme_white_list,flow"`
 }
 
 // proxy 反向代理配置

@@ -35,8 +35,14 @@ proxy:
         minify: onlyMin # Compressed file configuration, three types: all / onlyMin / none
         endpoint: ['https://unpkg.com/{{package}}@{{version}}/{{path}}'] # array<string> list of proxies, tried in order from top to bottom
         white_list: [] # Whitelist, format: @<user>/<package> or <package>
-        
-# 跨域配置
+    wordpress: # WordPress proxy
+      plugin_open: false # Whether to open for plugins proxy
+      theme_open: false # Whether to open for plugins proxy
+      minify: none # Compressed file configuration, only support two types: all / none
+      plugin_white_list: [] # Whitelist for plugins, format: <name>
+      theme_white_list: [] # Whitelist for themes, format: <name>
+
+# Cross Origin Configuration
 cors:
     allow_origins: [UNSET] # Default is wildcard
     allow_methods: [GET, HEAD, OPTIONS]
@@ -81,6 +87,18 @@ https://<domain>/npm/<package>@<version>/<path>
 https://<domain>/npm/<package>@<version>
 # will be redirected to
 https://<domain>/npm/@<user>/<package>@<version>/<path> # main file
+```
+
+### WordPress
+
+The WordPress proxy service obtains resources from https://themes.svn.wordpress.org and https://plugins.svn.wordpress.org by default in the following format:
+
+```
+# For themes in wordpress.org
+https://<domain>/wp/theme/<name>/<version>/<path>
+
+# For plugins in wordpress.org
+https://<domain>/wp/plugin/<name>/<version>/<path>
 ```
 
 ## Feature

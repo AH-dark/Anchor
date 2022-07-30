@@ -1,9 +1,11 @@
 package conf
 
+type MinifyType string
+
 const (
-	MinifyAll     = "all"     // MinifyAll 压缩所有可压缩文件
-	MinifyOnlyMin = "onlyMin" // MinifyOnlyMin 仅压缩 .min.* 结尾的文件
-	MinifyNone    = "none"    // MinifyNone 不压缩文件
+	MinifyAll     MinifyType = "all"     // MinifyAll 压缩所有可压缩文件
+	MinifyOnlyMin MinifyType = "onlyMin" // MinifyOnlyMin 仅压缩 .min.* 结尾的文件
+	MinifyNone    MinifyType = "none"    // MinifyNone 不压缩文件
 )
 
 var Config = &config{
