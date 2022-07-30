@@ -10,19 +10,12 @@ import (
 	"net/http"
 )
 
-type WpProxyType string
-
-const (
-	WpProxyTypeTheme  WpProxyType = "theme"
-	WpProxyTypePlugin WpProxyType = "plugin"
-)
-
-func WordpressRawFileProxy(proxyType WpProxyType) gin.HandlerFunc {
+func WordpressRawFileProxy(proxyType services.WpProxyType) gin.HandlerFunc {
 	var endpoint = ""
 	switch proxyType {
-	case WpProxyTypeTheme:
+	case services.WpProxyTypeTheme:
 		endpoint = "https://themes.svn.wordpress.org/{{name}}/{{version}}/"
-	case WpProxyTypePlugin:
+	case services.WpProxyTypePlugin:
 		endpoint = "https://plugins.svn.wordpress.org/{{name}}/tags/{{version}}/"
 	}
 

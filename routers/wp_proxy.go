@@ -4,6 +4,7 @@ import (
 	"github.com/AH-dark/Anchor/controllers"
 	"github.com/AH-dark/Anchor/pkg/conf"
 	"github.com/AH-dark/Anchor/pkg/utils"
+	"github.com/AH-dark/Anchor/services"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,10 +14,10 @@ func InitWordpressProxy(r *gin.RouterGroup) {
 
 	{
 		if conf.Config.Proxy.Wp.ThemeOpen {
-			r.GET("theme/:name/:version/*path", controllers.WordpressRawFileProxy(controllers.WpProxyTypeTheme))
+			r.GET("theme/:name/:version/*path", controllers.WordpressRawFileProxy(services.WpProxyTypeTheme))
 		}
 		if conf.Config.Proxy.Wp.PluginOpen {
-			r.GET("plugin/:name/:version/*path", controllers.WordpressRawFileProxy(controllers.WpProxyTypePlugin))
+			r.GET("plugin/:name/:version/*path", controllers.WordpressRawFileProxy(services.WpProxyTypePlugin))
 		}
 	}
 }
