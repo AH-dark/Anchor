@@ -25,6 +25,13 @@ var Config = &config{
 			Endpoint:  []string{"https://unpkg.com/{{package}}@{{version}}/{{path}}"},
 			WhiteList: nil,
 		},
+		Wp: wordpressProxy{
+			PluginOpen:      false,
+			ThemeOpen:       false,
+			Minify:          MinifyNone,
+			PluginWhiteList: nil,
+			ThemeWhiteList:  nil,
+		},
 	},
 	CORS: cors{
 		AllowOrigins:     []string{"UNSET"},

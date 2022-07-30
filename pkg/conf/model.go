@@ -23,10 +23,19 @@ type npmProxy struct {
 	WhiteList []string `yaml:"white_list,flow"`
 }
 
+type wordpressProxy struct {
+	PluginOpen      bool     `yaml:"plugin_open"`
+	ThemeOpen       bool     `yaml:"theme_open"`
+	Minify          string   `yaml:"minify"`
+	PluginWhiteList []string `yaml:"plugin_white_list,flow"`
+	ThemeWhiteList  []string `yaml:"theme_white_list,flow"`
+}
+
 // proxy 反向代理配置
 type proxy struct {
-	Github githubProxy `yaml:"github"`
-	Npm    npmProxy    `yaml:"npm"`
+	Github githubProxy    `yaml:"github"`
+	Npm    npmProxy       `yaml:"npm"`
+	Wp     wordpressProxy `yaml:"wordpress"`
 }
 
 // cors 跨域配置
