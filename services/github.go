@@ -41,7 +41,7 @@ func GetGithubRawFile(user string, repo string, version string, path string) []b
 
 // CheckGithubWhiteList 检验仓库信息是否在白名单内
 func CheckGithubWhiteList(user string, repo string) bool {
-	if len(conf.Config.Proxy.Github.WhiteList) == 0 {
+	if conf.Config.Proxy.Github.WhiteList == nil || len(conf.Config.Proxy.Github.WhiteList) == 0 {
 		return true
 	}
 

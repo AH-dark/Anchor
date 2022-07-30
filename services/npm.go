@@ -51,7 +51,7 @@ func GetNpmRawFile(user string, pkg string, version string, path string) []byte 
 
 // CheckNpmWhiteList 检验仓库信息是否在白名单内
 func CheckNpmWhiteList(user string, pkg string) bool {
-	if len(conf.Config.Proxy.Npm.WhiteList) == 0 {
+	if conf.Config.Proxy.Npm.WhiteList == nil || len(conf.Config.Proxy.Npm.WhiteList) == 0 {
 		return true
 	}
 
