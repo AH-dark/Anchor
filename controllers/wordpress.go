@@ -37,6 +37,12 @@ func WordpressRawFileProxy(proxyType WpProxyType) gin.HandlerFunc {
 		version := c.Param("version")
 		path := c.Param("path")
 
+		// check in whitelist
+		if !services.CheckWordpressWhitelist(proxyType, name) {
+			c.String(http.StatusForbidden, http.StatusText(http.StatusForbidden))
+			return
+		}
+
 		// get body data
 		data := services.GetWordpressRawFile(endpoint, name, version, path)
 		if data == nil {

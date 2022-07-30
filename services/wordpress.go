@@ -1,6 +1,8 @@
 package services
 
 import (
+	"github.com/AH-dark/Anchor/controllers"
+	"github.com/AH-dark/Anchor/pkg/conf"
 	"github.com/AH-dark/Anchor/pkg/utils"
 	"io/ioutil"
 	"net/http"
@@ -32,4 +34,26 @@ func GetWordpressRawFile(endpoint string, name string, version string, path stri
 	}
 
 	return body
+}
+
+func CheckWordpressWhitelist(t controllers.WpProxyType, name string) bool {
+	var arr []string
+	switch t {
+	case controllers.WpProxyTypeTheme:
+		arr = conf.Config.Proxy.Wp.ThemeWhiteList
+	case controllers.WpProxyTypePlugin:
+		arr = conf.Config.Proxy.Wp.PluginWhiteList
+	}
+
+	if arr == nil || len(arr) == 0 {
+		return true
+	}
+
+	for _, v := range arr {
+		if name == v {
+			return true
+		}
+	}
+
+	return false
 }
