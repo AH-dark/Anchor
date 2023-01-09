@@ -1,8 +1,8 @@
 github.com/cespare/xxhash/v2 v2.1.2 h1:YRXhKfTDauu4ajMg1TPgFO5jnlC2HCbmLXMcTG5cbYE=
 github.com/cespare/xxhash/v2 v2.1.2/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/cheekybits/is v0.0.0-20150225183255-68e9c0620927/go.mod h1:h/aW8ynjgkuj+NQRlZcDbAbM1ORAbXjXX77sX7T289U=
-github.com/chenyahui/gin-cache v1.7.1 h1:A9SCGJJxaqJqtasQ6OA9Qr7e1d3KSj+zK9j+JYHa+Gc=
-github.com/chenyahui/gin-cache v1.7.1/go.mod h1:eEAwR4874QJI3dY7rdkoartzwVD0e1iq8wEJaEbzA64=
+github.com/chenyahui/gin-cache v1.8.0 h1:OnjQcUOLUfhVhQjMNfZSLbSgcPzEnOsKQS52Gh2JQiI=
+github.com/chenyahui/gin-cache v1.8.0/go.mod h1:eEAwR4874QJI3dY7rdkoartzwVD0e1iq8wEJaEbzA64=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
