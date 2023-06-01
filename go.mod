@@ -3,7 +3,7 @@ module github.com/AH-dark/Anchor
 go 1.18
 
 require (
-	github.com/chenyahui/gin-cache v1.7.1
+	github.com/chenyahui/gin-cache v1.8.1
 	github.com/fatih/color v1.13.0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-contrib/gzip v0.0.6
